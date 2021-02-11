@@ -1,10 +1,26 @@
-// 1. Convert the message text into binaty code
 const MESSAGE = readline().charCodeAt().toString(2);
 
 console.log(MESSAGE);
 
-// 2.
+let array = [];
 
+for (let i = 0; i < MESSAGE.length; i++) {
+    array.push(parseInt(MESSAGE[i]));
+}
+
+console.log(array);
+
+for (let j = 0; j < array.length; j++){
+    let integersCount;
+
+    if (array[j] == 1) {
+
+    }
+}
+
+function (){
+
+}
 
 console.log('answer');
 
