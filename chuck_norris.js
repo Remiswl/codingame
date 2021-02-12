@@ -8,33 +8,39 @@ for (let i = 0; i < binaryMessage.length; i++) {
 
 // Pour chacun des éléments du tableau,
 for (let i = 0; i < arrayMessage.length; i++) {
-    console.log(arrayMessage[i]);
-
     // on identifie le premier élément
+    // puis on continue à lire le tableau
+    // dès qu'on change de chiffre, on arrête la boucle
+    // et on compte le nombre d'occurence du nombre
+    // puis on reprend la boucle
+
+    unaireMessage = unaireMessage + secondBloc(i);
+}
+
+function firstBloc(i) {
     if (arrayMessage[i] == 0) {
         unaireMessage = `${unaireMessage }${00 }`;
     } else {
         unaireMessage = `${unaireMessage }${0 }`;
     }
 
-    // puis on continue à lire le tableau
-    // dès qu'on change de chiffre, on arrête la boucle
-    // et on compte le nombre d'occurence du nombre
-    let bitCount = 0;
-
-    for (let j = 0; j < arrayMessage.length; j++) {
-        console.log(arrayMessage[j], arrayMessage [i]);
-
-        // while (arrayMessage[j] = arrayMessage [i]) {
-        //    bitCount ++;
-        // }
-    }
-
-    console.log(bitCount);
-    // puis on reprend la boucle
+    return unaireMessage;
 }
 
-console.log(arrayMessage);
+function secondBloc(i) {
+    for (let j = 0; j < arrayMessage.length; j++) {
+        let bitCount = 0;
+
+        if (arrayMessage[j] === arrayMessage [i]) {
+            bitCount++;
+            return bitCount;
+        } else if (arrayMessage[j] !== arrayMessage [i]) {
+            break;
+        }
+    }
+}
+
+console.log(binaryMessage);
 console.log(unaireMessage);
 
 
