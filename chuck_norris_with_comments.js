@@ -34,14 +34,14 @@ for (let i = 1; i < binaryMessage.length; i++) {
     if (nextBit == currentBit) {
         unaireMessage = unaireMessage + 0;
     }
-    // else add a space, the code of the digit (0 or 00)
+    // else add a space, the code of the digit (0 or 00), a space
     // and a 0 to count the first new digit
     else {
         unaireMessage = `${unaireMessage } ${ encode[nextBit] } ${ 0}`;
     }
 
-    // Once the 2nd bit was analyzed,
-    // the 2nd bit become the (i-1)th bit
+    // Once the (i)th bit was analyzed,
+    // the (i)th bit become the (i-1)th bit
     currentBit = nextBit;
 }
 
