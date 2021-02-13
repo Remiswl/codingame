@@ -1,48 +1,39 @@
+// 1. Transform the message in a binary message
 const binaryMessage = readline().charCodeAt().toString(2);
-let arrayMessage = [];
 let unaireMessage = '';
 
-for (let i = 0; i < binaryMessage.length; i++) {
-    arrayMessage.push(parseInt(binaryMessage[i]));
-}
+let encode = {
+    0 : '00',
+    1 : '0'
+};
 
-// Pour chacun des éléments du tableau,
-for (let i = 0; i < arrayMessage.length; i++) {
-    // on identifie le premier élément
-    // puis on continue à lire le tableau
-    // dès qu'on change de chiffre, on arrête la boucle
-    // et on compte le nombre d'occurence du nombre
-    // puis on reprend la boucle
+// 2. Identify the 1st digit
+// and write the first bloc of code (first bit x 1)
+let currentBit = binaryMessage[0];
+unaireMessage = `${encode[currentBit] } ${ 0}`;
 
-    unaireMessage = unaireMessage + secondBloc(i);
-}
+// 3. For the rest of the message
+// read each digit
+for (let i = 1; i < binaryMessage.length; i++) {
+    let nextBit = binaryMessage[i];
 
-function firstBloc(i) {
-    if (arrayMessage[i] == 0) {
-        unaireMessage = `${unaireMessage }${00 }`;
-    } else {
-        unaireMessage = `${unaireMessage }${0 }`;
+    // If the digit is equal to the previous one
+    // add a zero to the unaire message
+    if (nextBit == currentBit) {
+        unaireMessage = unaireMessage + 0;
+    }
+    // else add a space, the code of the digit (0 or 00)
+    // and a 0 to count the first new digit
+    else {
+        unaireMessage = `${unaireMessage } ${ encode[nextBit] } ${ 0}`;
     }
 
-    return unaireMessage;
+    // Once the 2nd bit was analyzed,
+    // the 2nd bit become the (i-1)th bit
+    currentBit = nextBit;
 }
 
-function secondBloc(i) {
-    for (let j = 0; j < arrayMessage.length; j++) {
-        let bitCount = 0;
-
-        if (arrayMessage[j] === arrayMessage [i]) {
-            bitCount++;
-            return bitCount;
-        } else if (arrayMessage[j] !== arrayMessage [i]) {
-            break;
-        }
-    }
-}
-
-console.log(binaryMessage);
 console.log(unaireMessage);
-
 
 // How to convert text to binary code:
 // 1. Convert every char using charCodeAt function to get the Ascii Code in decimal (UTF-16 code)
