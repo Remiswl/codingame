@@ -13,12 +13,17 @@ while (true) {
     let thrust;
 
     if (nextCheckpointAngle > 90 || nextCheckpointAngle < -90) {
-        thrust = 0;
+        thrust = 10;
     } else if (nextCheckpointDist > 3000) {
         thrust = 'BOOST';
     } else {
         thrust = 100;
     }
+
+    if (Math.abs(x - opponentX) < 5 || Math.abs(y - opponentY) < 5) {
+        thrust = 0;
+    }
+
 
     console.log(`${nextCheckpointX } ${ nextCheckpointY } ${ thrust}`);
 }
