@@ -37,24 +37,20 @@ while (true) {
         currentX = jumpX;
     } else if (bombDir[0] == 'L' || bombDir[1] != 'undefined' && bombDir[1] == 'L') {
         jumpX = (currentX - previousX) / 2;
-        jumpX = currentX + Math.round(Math.abs(jumpX) - 1);
+        jumpX = currentX - Math.round(Math.abs(jumpX));
         previousX = currentX;
         currentX = jumpX;
     }
 
     if (jumpX < 0) {
         jumpX = 0;
+    } else if (jumpX >= W) {
+        jumpX = W - 1;
     }
 
     if (jumpY < 0) {
         jumpY = 0;
-    }
-
-    if (jumpX >= W) {
-        jumpX = W - 1;
-    }
-
-    if (jumpY >= H) {
+    } else if (jumpY >= H) {
         jumpY = H - 1;
     }
 
