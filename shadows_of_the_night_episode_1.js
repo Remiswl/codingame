@@ -1,58 +1,38 @@
 let inputs = readline().split(' ');
-const W = parseInt(inputs[0]);
-const H = parseInt(inputs[1]);
+let maxX = parseInt(inputs[0]);
+let minX = 0;
+let maxY = parseInt(inputs[1]);
+let minY = 0;
 const N = parseInt(readline());
 inputs = readline().split(' ');
-const X0 = parseInt(inputs[0]);
-const Y0 = parseInt(inputs[1]);
+let currentX = parseInt(inputs[0]);
+let currentY = parseInt(inputs[1]);
 
-let previousX = W;
-let previousY = H;
-
-let currentX = X0;
-let currentY = Y0;
-
-let jumpX = 0;
-let jumpY = 0;
+let jumpToX = 0;
+let jumpToY = 0;
 
 while (true) {
     const bombDir = readline().split('');
 
     if (bombDir[0] == 'D') {
-        jumpY = (previousY - currentY) / 2;
-        jumpY = currentY + Math.round(Math.abs(jumpY));
-        previousY = currentY;
-        currentY = jumpY;
+        jumpToY = currentY + Math.round(Math.abs((maxY - currentY) / 2));
+        minY = currentY;
+        currentY = jumpToY;
     } else if (bombDir[0] == 'U') {
-        jumpY = (currentY - previousY) / 2;
-        jumpY = currentY - Math.round(Math.abs(jumpY));
-        previousY = currentY;
-        currentY = jumpY;
+        jumpToY = currentY - Math.round(Math.abs((currentY - minY) / 2));
+        maxY = currentY;
+        currentY = jumpToY;
     }
 
     if (bombDir[0] == 'R' || bombDir[1] != 'undefined' && bombDir[1] == 'R') {
-        jumpX = (previousX - currentX) / 2;
-        jumpX = currentX + Math.round(Math.abs(jumpX));
-        previousX = currentX;
-        currentX = jumpX;
+        jumpToX = currentX + Math.round(Math.abs((maxX - currentX) / 2));
+        minX = currentX;
+        currentX = jumpToX;
     } else if (bombDir[0] == 'L' || bombDir[1] != 'undefined' && bombDir[1] == 'L') {
-        jumpX = (currentX - previousX) / 2;
-        jumpX = currentX - Math.round(Math.abs(jumpX));
-        previousX = currentX;
-        currentX = jumpX;
+        jumpToX = currentX - Math.round(Math.abs((currentX - minX) / 2));
+        maxX = currentX;
+        currentX = jumpToX;
     }
 
-    if (jumpX < 0) {
-        jumpX = 0;
-    } else if (jumpX >= W) {
-        jumpX = W - 1;
-    }
-
-    if (jumpY < 0) {
-        jumpY = 0;
-    } else if (jumpY >= H) {
-        jumpY = H - 1;
-    }
-
-    console.log(jumpX, jumpY);
+    console.log(jumpToX, jumpToY);
 }
