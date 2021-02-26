@@ -18,14 +18,13 @@ for (let i = 0; i < N; i++) {
     let latDef = parseFloat(DEFIB[5].replace(',', '.'));
 
     distToUser = calcDistance(LON, LAT, longDef, latDef);
-    distToUser = distToUser.toFixed(3);
+    distToUser = parseFloat(distToUser.toFixed(3));
 
     if (shortestDist === undefined) {
         shortestDist = distToUser;
         closestDef = DEFIB[1];
     }
 
-    // TODO: Do not compare correctly floating numbers
     if (distToUser < shortestDist) {
         shortestDist = distToUser;
         closestDef = DEFIB[1];
