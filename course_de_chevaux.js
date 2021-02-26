@@ -21,6 +21,4 @@ diffs = diffs.sort((a, b) => {
     return a - b;
 });
 
-// Write an answer using console.log()
-// To debug: console.error('Debug messages...');
 console.log(diffs[0]);
