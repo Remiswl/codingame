@@ -14,15 +14,20 @@ function calcDistance(longA, latA, longB, latB) {
 
 for (let i = 0; i < N; i++) {
     const DEFIB = readline().split(';');
+    let longDef = parseFloat(DEFIB[4].replace(',', '.'));
+    let latDef = parseFloat(DEFIB[5].replace(',', '.'));
 
-    distToUser = calcDistance(LON, LAT, parseFloat(DEFIB[4].replace(',', '.')), parseFloat(DEFIB[5].replace(',', '.'))).toFixed(3);
+    distToUser = calcDistance(LON, LAT, longDef, latDef);
+    distToUser = distToUser.toFixed(3);
 
-    if (shortestDist == undefined) {
+    if (shortestDist === undefined) {
         shortestDist = distToUser;
+        closestDef = DEFIB[1];
     }
 
+    // TODO: Do not compare correctly floating numbers
     if (distToUser < shortestDist) {
-        distToUser = shortestDist;
+        shortestDist = distToUser;
         closestDef = DEFIB[1];
     }
 }
