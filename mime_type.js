@@ -7,7 +7,7 @@ for (let i = 0; i < N; i++) {
     const EXT = inputs[0].toLowerCase();
     const MT = inputs[1];
 
-    mimeTypes.push(EXT, MT);
+    mimeTypes[EXT] = MT;
 }
 
 for (let i = 0; i < Q; i++) {
@@ -17,13 +17,9 @@ for (let i = 0; i < Q; i++) {
     if (FNAME.lastIndexOf('.') >= 0 && FNAME.slice(dot + 1).length > 0) {
         FNAME = FNAME.slice(dot + 1);
 
-        for (let j = 0; j < mimeTypes.length; j++) {
-            if (FNAME.toLowerCase() == mimeTypes[j].toLowerCase()) {
-                console.log(mimeTypes[j + 1]);
-            }
-        }
-
-        if (mimeTypes.includes(FNAME.toLowerCase()) === false) {
+        if (mimeTypes.hasOwnProperty(FNAME.toLowerCase()) === true) {
+            console.log(mimeTypes[FNAME.toLowerCase()]);
+        } else {
             console.log('UNKNOWN');
         }
     } else {
