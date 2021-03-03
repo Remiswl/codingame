@@ -58,8 +58,8 @@ function coordsBottom(i, j) {
                 x3 = -1;
                 y3 = -1;
             } else if (array[i + 1][j] === '0') {
-                x3 = j + 1;
-                y3 = i;
+                x3 = j;
+                y3 = i + 1;
             }
         }
     } else {
