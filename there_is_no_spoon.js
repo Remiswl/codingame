@@ -1,19 +1,7 @@
 const width = parseInt(readline());
 const height = parseInt(readline());
 let x1, y1, x2, y2, x3, y3;
-
 let array = [];
-
-for (let i = 0; i < height; i++) {
-    const line = readline();
-    let coord = [];
-
-    for (let j = 0; j < line.length; j++) {
-        coord.push(line[j]);
-    }
-
-    array.push(coord);
-}
 
 function showCoords(i, j) {
     x1 = j;
@@ -28,9 +16,9 @@ function coordsRight(i, j) {
         } else if (array[i][j + 1] !== '0') {
             do {
                 j = j + 1;
-            } while (array[i] !== undefined && array[i][j + 1] !== '0');
+            } while (array[i][j + 1] !== undefined && array[i][j + 1] !== '0');
 
-            if (array[i] === undefined) {
+            if (array[i] === undefined || array[i][j + 1] === undefined) {
                 x2 = -1;
                 y2 = -1;
             } else if (array[i][j + 1] === '0') {
@@ -54,7 +42,7 @@ function coordsBottom(i, j) {
                 i = i + 1;
             } while (array[i + 1] !== undefined && array[i + 1][j] !== '0');
 
-            if (array[i + 1] === undefined) {
+            if (array[i + 1] === undefined || array[i + 1][j] === undefined) {
                 x3 = -1;
                 y3 = -1;
             } else if (array[i + 1][j] === '0') {
@@ -66,6 +54,11 @@ function coordsBottom(i, j) {
         x3 = -1;
         y3 = -1;
     }
+}
+
+for (let i = 0; i < height; i++) {
+    const line = readline();
+    array.push(line.split(''));
 }
 
 for (let i = 0; i < height; i++) {
