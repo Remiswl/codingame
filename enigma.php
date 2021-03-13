@@ -33,19 +33,11 @@ if($operation === "ENCODE") {
     }
 } else if($operation === "DECODE"){
     // Rotors
-    for ($i = 0; $i < strlen($message); $i++){
-        $index = strpos($rotors[2], $message[$i]);
-        $message[$i] = $alphabet[$index];
-    }
-
-    for ($i = 0; $i < strlen($message); $i++){
-        $index = strpos($rotors[1], $message[$i]);
-        $message[$i] = $alphabet[$index];
-    }
-
-    for ($i = 0; $i < strlen($message); $i++){
-        $index = strpos($rotors[0], $message[$i]);
-        $message[$i] = $alphabet[$index];
+    for ($j = 2; $j >= 0; $j--){
+        for ($i = 0; $i < strlen($message); $i++){
+            $index = strpos($rotors[$j], $message[$i]);
+            $message[$i] = $alphabet[$index];
+        }
     }
 
     // Caesar
