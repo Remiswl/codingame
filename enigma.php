@@ -17,7 +17,7 @@ if($operation === "ENCODE") {
     for ($i = 0; $i < strlen($message); $i++){
         $index = strpos($alphabet, $message[$i]) + $pseudoRandomNumber + $i;
 
-        while ($index > 26) {
+        while ($index >= 26) {
             $index = $index - 26;
         }
 
