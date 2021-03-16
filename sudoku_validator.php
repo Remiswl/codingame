@@ -1,5 +1,4 @@
 <?php
-$answer = "true";
 
 $fullGrid = [];
 for ($i = 0; $i < 9; $i++) {
@@ -7,44 +6,74 @@ for ($i = 0; $i < 9; $i++) {
     array_push($fullGrid, $inputs);
 }
 
-// ROW
-// For each $fullGrid[$i]
-for ($i = 0; $i < 9; $i++) {
+// Row
+for ($j = 0; $j < 9; $j++) {
+    for ($i = 0; $i < 9; $i++) {
+        $gridString = implode('', $fullGrid[$j]);
+        $occurences = substr_count($gridString, strval($i+1));
 
-    // Calculate the sum of the digits
-    $result = 0;
-    for ($j = 0; $j < 9; $j++) {
-        $result += intval($fullGrid[$i][$j]);
+        if($occurences !== 1){
+            $answer = "false";
+            break;
+        } else {
+            $answer = "true";
+        }
     }
 
-    // If the sum is equal to 45
-    // then each digit (from 1 to 9) appears once
-    if($result != 45) {
-        $answer = "false";
-    };
+    if($answer === "false"){
+        break;
+    }
 }
 
 // Column
-// For each (j)th digit of each lign
-for ($i = 0; $i < 9; $i++) {
+if($answer === "true"){
+    for ($i = 0; $i < 9; $i++) {
+        $column = "";
 
-    $result = 0;
+        for ($j = 0; $j < 9; $j++) {
+            $digit = substr(implode('', $fullGrid[$j]), $i, 1);
+            $column = $column . $digit;
+        }
 
-    // For each $fullGrid[$i]
-    for ($j = 0; $j < 9; $j++) {
-        $result += intval($fullGrid[$j][$i]);
+        $occurences = substr_count($column, strval($i+1));
+
+        if($occurences !== 1){
+            $answer = "false";
+            break;
+        } else {
+            $answer = "true";
+        }
     }
-
-    if($result != 45) {
-        $answer = "false";
-    };
-
 }
 
-// Sub-grid
+// Subgrid
+ if($answer === "true"){
+    for ($j = 0; $j < 3; $j++) {
+        for ($i = 0; $i < 9; $i+=3) {
 
+            $subgrid = "";
 
-// Write an answer using echo(). DON'T FORGET THE TRAILING \n
-// To debug: error_log(var_export($var, true)); (equivalent to var_dump)
+            $gridString = implode('', $fullGrid[$j]);
 
-echo($answer);
+            $subgrids = substr($gridString, $i, 3);
+
+            $subgrid = $subgrid . $subgrids;
+
+            $occurences = substr_count($subgrid, strval($i+1));
+
+            if($occurences !== 1){
+                $answer = "false";
+                break;
+            } else {
+                $answer = "true";
+            }
+
+        }
+
+        if($answer === "false"){
+            break;
+        }
+    }
+ }
+
+echo $answer;
