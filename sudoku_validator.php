@@ -47,17 +47,14 @@ if($answer === "true"){
 }
 
 // Subgrid
- if($answer === "true"){
-    for ($j = 0; $j < 3; $j++) {
-        for ($i = 0; $i < 9; $i+=3) {
+if($answer === "true"){
+    for ($i = 0; $i < 9; $i+=3) {
+        for ($j = 0; $j < 9; $j+=3) {
+            $subgrid = '';
 
-            $subgrid = "";
-
-            $gridString = implode('', $fullGrid[$j]);
-
-            $subgrids = substr($gridString, $i, 3);
-
-            $subgrid = $subgrid . $subgrids;
+            $subgrid = $subgrid . substr(implode('', $fullGrid[$i]), $j, 3);
+            $subgrid = $subgrid . substr(implode('', $fullGrid[$i+1]), $j, 3);
+            $subgrid = $subgrid . substr(implode('', $fullGrid[$i+2]), $j, 3);
 
             $occurences = substr_count($subgrid, strval($i+1));
 
@@ -67,13 +64,12 @@ if($answer === "true"){
             } else {
                 $answer = "true";
             }
-
         }
 
         if($answer === "false"){
             break;
         }
     }
- }
+}
 
 echo $answer;
